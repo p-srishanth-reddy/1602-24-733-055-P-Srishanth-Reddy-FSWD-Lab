@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tabs — Example</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Tabs Example (max-width: 700px)</h1>
+
+  <div class="tab">
+    <div class="tab-headers">
+      <button class="tab-btn active" aria-controls="tab1">Tab 1</button>
+      <button class="tab-btn" aria-controls="tab2">Tab 2</button>
+      <button class="tab-btn" aria-controls="tab3">Tab 3</button>
+    </div>
+
+    <div class="tab-content">
+      <section id="tab1" class="content active">
+        <h2>Tab 1</h2>
+        <p>This is the content for Tab 1.</p>
+      </section>
+
+      <section id="tab2" class="content">
+        <h2>Tab 2</h2>
+        <p>This is the content for Tab 2.</p>
+      </section>
+
+      <section id="tab3" class="content">
+        <h2>Tab 3</h2>
+        <p>This is the content for Tab 3.</p>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // Small JS to switch tabs (keeps markup simple)
+    document.querySelectorAll('.tab-headers .tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.getAttribute('aria-controls');
+
+        // headers
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // content
+        document.querySelectorAll('.tab-content .content').forEach(c => c.classList.remove('active'));
+        document.getElementById(tab).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
