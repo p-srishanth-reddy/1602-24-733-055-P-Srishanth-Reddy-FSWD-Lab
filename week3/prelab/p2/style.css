@@ -1,0 +1,115 @@
+/* style.css
+   Styles for tab component — container limited to max-width: 700px
+*/
+
+:root{
+  --bg: #ffffff;
+  --muted: #f3f4f6;
+  --accent: #2563eb;
+  --text: #1f2937;
+  --muted-text: #6b7280;
+  --shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  --radius: 10px;
+  --gap: 0.5rem;
+}
+
+*{box-sizing:border-box}
+body{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: #f8fafc;
+  color:var(--text);
+  padding:2rem;
+}
+
+/* Container: limit width to 700px and center */
+.tab{
+  max-width: 700px;        /* <-- max-width requirement */
+  margin: 1.5rem auto;
+  background: var(--bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid rgba(15,23,42,0.04);
+}
+
+/* Header buttons row */
+.tab-headers{
+  display: flex;
+  gap: var(--gap);
+  background: var(--muted);
+  padding: 0.25rem;
+}
+
+/* Individual tab button */
+.tab-btn{
+  flex: 1 1 0;
+  border: none;
+  background: transparent;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  color: var(--muted-text);
+  cursor: pointer;
+  border-radius: 8px;
+  transition: color .15s ease, background .15s ease, transform .08s ease;
+  outline: none;
+}
+
+/* Hover/focus for accessibility */
+.tab-btn:hover,
+.tab-btn:focus{
+  color: var(--text);
+  background: rgba(15,23,42,0.03);
+  transform: translateY(-1px);
+}
+
+/* Active tab styling */
+.tab-btn.active{
+  color: var(--text);
+  background: var(--bg);
+  box-shadow: 0 1px 0 rgba(15,23,42,0.04) inset;
+  border-bottom: 3px solid var(--accent);
+}
+
+/* Content area */
+.tab-content{
+  padding: 1.25rem;
+}
+
+/* Each content panel — only the active one is shown */
+.content{
+  display: none;
+  animation: fadeIn .18s ease;
+}
+.content.active{
+  display: block;
+}
+
+/* Small fade-in */
+@keyframes fadeIn{
+  from{opacity:0; transform: translateY(4px)}
+  to{opacity:1; transform: translateY(0)}
+}
+
+/* Responsive adjustments for narrower screens (<=700px) */
+@media (max-width: 700px){
+  .tab{
+    margin: 1rem;
+    border-radius: 8px;
+  }
+
+  /* Stack headers vertically so buttons are tappable on small screens */
+  .tab-headers{
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.5rem;
+  }
+  .tab-btn{
+    text-align: left;
+    padding: 0.85rem 0.9rem;
+    font-size: 0.98rem;
+  }
+
+  .tab-content{
+    padding: 1rem;
+  }
+}
